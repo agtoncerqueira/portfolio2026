@@ -71,7 +71,6 @@ const textColor = computed(() => {
      textColor += ' text-dark'
   } else if (props.blok.color === 'secondary') {
      textColor += ' text-secondary'
-     console.log("texto dark")
   } else if (props.blok.color === 'primary') {
      textColor += ' text-primary'
   } else if (props.blok.color === 'medium') {

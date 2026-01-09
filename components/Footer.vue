@@ -58,10 +58,10 @@ onMounted(() => {
       <div
         class="h-[1px] w-full bg-gradient-to-r from-dark via-secondary to-dark"
       ></div>
-      <span class="block mx-auto  pointer-events-none text-center text-secondary">
-        aghi.cerqueira@gmail.com
+      <span class="block mx-auto mt-5  text-center text-white">
+        Get in touch with me: <a href="mailto:aghi.cerqueira@gmail.com" class="text-secondary">aghi.cerqueira@gmail.com</a>
       </span>
-      <span class="block mx-auto py-9 pointer-events-none text-center text-light">Aghi Cerqueira @{{ currentYear }}. All rights reserveds.</span>
+      <span class="block mx-auto py-9 pointer-events-none text-center text-light">Made with ❤️ by Aghi Cerqueira @{{ currentYear }}. All rights reserveds.</span>
     </div>
   </footer>
 </template>

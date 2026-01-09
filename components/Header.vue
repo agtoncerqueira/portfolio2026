@@ -8,6 +8,7 @@ const props = defineProps({
 })
 
 const mobileNavOpen = ref(false)
+console.log(props.nav) 
 
 const toggleMobileNav = () => {
   mobileNavOpen.value = !mobileNavOpen.value

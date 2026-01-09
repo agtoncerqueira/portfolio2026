@@ -7,11 +7,34 @@ const inEditor = computed(() => {
 
 const props = defineProps({ item: Object })
 
+const route = useRoute()
+
+
 const url = computed(() => {
   switch (props.item.link.linktype) {
     case 'story':
       // here we need to test if the story object exists because it won't be resolved when the bridge is used on site-config
-      return '/' + props.item.link.story?.full_slug
+      // return '/' + props.item.link.story?.full_slug
+      const targetUrl = props.item.link.cached_url || ''
+      const anchorId = props.item.link.anchor || ''
+
+      // Cria o link completo
+      const fullUrl = `${targetUrl}${anchorId ? `#${anchorId}` : ''}`
+
+      // Verifica se o link aponta para a mesma rota atual
+      const isSamePage = route.path === `/${targetUrl.replace(/^\//, '')}`
+
+      // Se for a mesma página, retorna apenas o hash
+      if (isSamePage) {
+        return `/${anchorId ? `#${anchorId}` : ''}`
+      }
+
+      // Caso contrário, retorna o link completo
+      return fullUrl
+      // const targetUrl = props.item.link.cached_url
+      // const anchorId = props.item.link.anchor
+      // return `${targetUrl}${anchorId ? `#${anchorId}` : ''}`
+      // return MenuItem
     case 'url':
     case 'asset':
       return props.item.link.url
@@ -21,6 +44,7 @@ const url = computed(() => {
       return '#'
   }
 })
+
 </script>
 
 <template>
