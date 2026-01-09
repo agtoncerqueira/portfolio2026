@@ -15,7 +15,7 @@
     "@nuxtjs/robots": "^5.5.6",
     "@nuxtjs/sitemap": "^7.4.7",
     "@nuxtjs/tailwindcss": "^6.14.0",
-    "@storyblok/nuxt": "^6.0.4",
+    "@storyblok/nuxt": "^6.2.4",
     "@vueuse/motion": "^3.0.3",
     "baseline-browser-mapping": "^2.9.13",
     "clone-deep": "^4.0.1",
