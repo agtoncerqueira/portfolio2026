@@ -17,7 +17,7 @@ defineProps({
       <ul v-if="headerNav" class="flex flex-col space-y-4 text-lg font-light">
         <li>
             <NuxtLink to="/" class="nav-item pointer-events-auto cursor-pointer transition-colors" :class="light ? 'text-dark' : 'text-white'" aria-label="Página Inicial">
-              Início
+              Home
             </NuxtLink>
           </li>
         <li v-for="item in headerNav" :key="item._uid">

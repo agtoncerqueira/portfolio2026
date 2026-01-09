@@ -65,7 +65,7 @@ onMounted(() => {
         <ul v-if="nav">
           <li>
             <NuxtLink to="/" class="nav-item pointer-events-auto cursor-pointer transition-colors" :class="light ? 'text-dark' : 'text-white'" aria-label="Página Inicial">
-              Início
+              Home
             </NuxtLink>
           </li>
           <li v-for="item in nav" :key="item._uid">
