@@ -1,81 +1,160 @@
 <script setup>
-const props = defineProps({ blok: Object })
-
-const optimizedIcon = computed(() => {
-  const isSvg = props.blok.icon?.filename.slice(-3) === 'svg'
-  const optimize = isSvg ? '' : '/m/' + props.blok?.icon_width + 'x0'
-  return props.blok.icon?.filename + optimize
-})
-
-const optimizedImage = computed(() =>
-  getOptimizedImage(props.blok.backgroundImage, 600),
-)
-
-const roundedImage = computed(() => {
-  return props.blok.rounded === true ? 'rounded-full' : ' ' 
-})
-const textColor = computed(() => {
-    if (props.blok.text_color === 'light') {
-    return 'text-light'
-    } else if (props.blok.text_color === 'white') {
-    return 'text-white'
-    } else if (props.blok.text_color === 'dark') {
-    return 'text-dark'
-    } else if (props.blok.text_color === 'secondary') {
-    return 'text-secondary'
-    } else if (props.blok.text_color === 'medium') {
-    return 'text-medium'
-    } else if (props.blok.text_color === 'primary') {
-    return 'text-primary'
-  } else {
-    return 'text-black'
-  }
-})
-</script>
-
-<template>
-  <div v-editable="blok"
-    class="flex h-full w-full max-w-md flex-col rounded-lg p-6 lg:max-w-none"
-    :style="
-      blok.background_color?.color
-        ? 'background-color: ' + blok.background_color.color
-        : ''
-    "
-  >
-    <img
+  const props = defineProps({
+    blok: {
+      type: Object,
+      required: true,
+    },
+  })
+  
+  // === Tipo de background ===
+  const backgroundType = computed(() => {
+    if (props.blok.backgroundVideo?.filename) return 'video'
+    if (props.blok.backgroundImage?.filename) return 'image'
+    if (props.blok.gradient_enabled) return 'gradient'
+    return 'color'
+  })
+  
+  // === Estilo de fundo (cor sólida) ===
+  const backgroundStyle = computed(() => {
+    if (backgroundType.value === 'color' && props.blok.background_color?.color) {
+      return { backgroundColor: props.blok.background_color.color }
+    }
+    return {}
+  })
+  
+  // === Gradiente dinâmico ===
+  const gradientClasses = computed(() => {
+    if (!props.blok.gradient_enabled) return ''
+    const direction = props.blok.gradient_direction || 'bg-gradient-to-r'
+    const from = props.blok.gradient_from || 'from-primary'
+    const to = props.blok.gradient_to || 'to-secondary'
+    return `${direction} ${from} ${to}`
+  })
+  
+  // === Bordas dinâmicas ===
+  const borderClasses = computed(() => {
+    const style = props.blok.border_style || 'solid'
+    const width = props.blok.border_width || '0'
+    const color = props.blok.border_color || 'transparent'
+    const radius = props.blok.rounded
+      ? 'rounded-full'
+      : props.blok.rounded_md
+      ? 'rounded-md'
+      : 'rounded-lg'
+  
+    return `border-${width} border-${color} border-${style} ${radius}`
+  })
+  
+  // === Texto dinâmico ===
+  const textClasses = computed(() => {
+    const colorMap = {
+      light: 'text-gray-200',
+      white: 'text-white',
+      dark: 'text-gray-900',
+      secondary: 'text-secondary',
+      medium: 'text-gray-500',
+      primary: 'text-primary',
+    }
+    const size = props.blok.text_size || 'base'
+    return `${colorMap[props.blok.text_color] || 'text-black'} text-${size}`
+  })
+  
+  // === Ícone otimizado ===
+  const optimizedIcon = computed(() => {
+    if (!props.blok.icon?.filename) return null
+    const isSvg = props.blok.icon.filename.slice(-3) === 'svg'
+    const optimize = isSvg ? '' : `/m/${props.blok.icon_width || 64}x0`
+    return props.blok.icon.filename + optimize
+  })
+  
+  // === Imagem otimizada ===
+  const optimizedImage = computed(() =>
+    getOptimizedImage(props.blok.backgroundImage, 1200)
+  )
+  
+  // === Wrapper dinâmico (linkável) ===
+  const cardWrapper = computed(() => {
+    if (props.blok.link_url) {
+      return props.blok.link_url.startsWith('/')
+        ? 'NuxtLink'
+        : 'a'
+    }
+    return 'div'
+  })
+  </script>
+  
+  <template>
+    <component
+      :is="cardWrapper"
+      v-editable="blok"
+      :to="blok.link_url?.startsWith('/') ? blok.link_url : null"
+      :href="blok.link_url && !blok.link_url.startsWith('/') ? blok.link_url : null"
+      class="relative flex flex-col items-center justify-center overflow-hidden aspect-square transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+      :class="[borderClasses, gradientClasses]"
+      :style="backgroundStyle"
+    >
+      <!-- === Background === -->
+      <template v-if="backgroundType === 'image'">
+        <img
           :src="optimizedImage"
           loading="lazy"
-          class="absolute top-0 left-0 z-0 w-full h-full object-cover pointer-events-none hover:scale-[1.02]"
-          :class="roundedImage"
+          class="absolute inset-0 z-0 w-full h-full object-cover pointer-events-none"
+          :class="blok.rounded ? 'rounded-full' : ''"
         />
-    <img
-      v-if="blok.icon.filename"
-      loading="lazy"
-      :src="optimizedIcon"
-      :alt="blok.icon.alt"
-      :width="blok.icon_width"
-      class="pointer-events-none mx-auto mb-6"
-      :class="roundedImage"
-      v-motion-fade-visible
-    />
-    <div class="flex grow flex-col">
-      <div class="grow" :class="textColor">
-        <h3
-          class="mb-3 font-display text-xl font-bold " v-motion-slide-visible-left
+      </template>
+  
+      <template v-else-if="backgroundType === 'video'">
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          class="absolute inset-0 z-0 w-full h-full object-cover pointer-events-none"
         >
-          {{ blok.label }}
-        </h3>
-        <div class="font-light leading-relaxed" v-motion-slide-visible-left> 
-          {{ blok.text }}
+          <source :src="blok.backgroundVideo.filename" type="video/mp4" />
+        </video>
+      </template>
+  
+      <!-- Overlay opcional -->
+      <div
+        v-if="blok.overlay_opacity"
+        class="absolute inset-0 z-[1]"
+        :style="`background-color: rgba(0,0,0,${blok.overlay_opacity})`"
+      ></div>
+  
+      <!-- === Conteúdo === -->
+      <div class="relative z-10 flex flex-col items-center justify-center p-6 text-center h-full w-full">
+        <!-- Ícone -->
+        <img
+          v-if="optimizedIcon"
+          :src="optimizedIcon"
+          :alt="blok.icon.alt || blok.label"
+          :width="blok.icon_width || 80"
+          loading="lazy"
+          class="mb-4 pointer-events-none"
+          :class="blok.rounded_icon ? 'rounded-full' : 'rounded-md'"
+          v-motion-fade-visible
+        />
+  
+        <!-- Título e texto -->
+        <div class="flex flex-col items-center" :class="textClasses">
+          <h3 class="font-display text-xl font-bold mb-3" v-motion-slide-visible-left>
+            {{ blok.label }}
+          </h3>
+          <div class="font-light leading-relaxed max-w-[80%]" v-motion-slide-visible-left>
+            {{ blok.text }}
+          </div>
+        </div>
+  
+        <!-- Botões -->
+        <div v-if="blok.button?.length" class="mt-4" v-motion-fade-visible>
+          <Button
+            v-for="button in blok.button"
+            :key="button._uid"
+            :button="button"
+          />
         </div>
       </div>
-      <div v-if="blok.button.length" class="mt-4" v-motion-fade-visible>
-        <Button
-          v-for="button in blok.button"
-          :key="button._uid"
-          :button="button"
-        />
-      </div>
-    </div>
-  </div>
-</template>
+    </component>
+  </template>
+  
