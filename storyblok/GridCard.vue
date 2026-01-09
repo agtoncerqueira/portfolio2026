@@ -89,7 +89,7 @@
       v-editable="blok"
       :to="blok.link_url?.startsWith('/') ? blok.link_url : null"
       :href="blok.link_url && !blok.link_url.startsWith('/') ? blok.link_url : null"
-      class="relative flex flex-col items-center justify-center overflow-hidden aspect-square transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+      class="relative flex flex-col items-center justify-start overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-lg w-[300px] max-w-full"
       :class="[borderClasses, gradientClasses]"
       :style="backgroundStyle"
     >
@@ -123,7 +123,7 @@
       ></div>
   
       <!-- === Conteúdo === -->
-      <div class="relative z-10 flex flex-col items-center justify-center p-6 text-center h-full w-full">
+      <div class="relative z-10 flex flex-col items-center text-center p-6 w-full">
         <!-- Ícone -->
         <img
           v-if="optimizedIcon"
@@ -137,11 +137,11 @@
         />
   
         <!-- Título e texto -->
-        <div class="flex flex-col items-center" :class="textClasses">
+        <div class="flex flex-col items-center w-full" :class="textClasses">
           <h3 class="font-display text-xl font-bold mb-3" v-motion-slide-visible-left>
             {{ blok.label }}
           </h3>
-          <div class="font-light leading-relaxed max-w-[80%]" v-motion-slide-visible-left>
+          <div class="font-light leading-relaxed max-w-[90%]" v-motion-slide-visible-left>
             {{ blok.text }}
           </div>
         </div>
