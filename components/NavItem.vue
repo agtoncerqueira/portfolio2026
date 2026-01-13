@@ -9,7 +9,6 @@ const props = defineProps({ item: Object })
 
 const route = useRoute()
 
-
 const url = computed(() => {
   switch (props.item.link.linktype) {
     case 'story':

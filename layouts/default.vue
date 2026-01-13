@@ -8,7 +8,7 @@
           :buttons="story.content.header_buttons"
           :light="story.content.header_light"
         />
-      <div>
+      <div class="overflow-hidden">
         <slot />
       </div>
       <LazyFooter v-if="story" hydrate-on-visible

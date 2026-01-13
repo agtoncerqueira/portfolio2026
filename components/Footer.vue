@@ -61,7 +61,7 @@ onMounted(() => {
       <span class="block mx-auto mt-5  text-center text-white">
         Get in touch with me: <a href="mailto:aghi.cerqueira@gmail.com" class="text-secondary">aghi.cerqueira@gmail.com</a>
       </span>
-      <span class="block mx-auto py-9 pointer-events-none text-center text-light">Made with ❤️ by Aghi Cerqueira @{{ currentYear }}. All rights reserveds.</span>
+      <span class="block mx-auto py-9 pointer-events-none text-center text-light">Made with ❤️ by Aghi Cerqueira @{{ currentYear }}. All rights reserved.</span>
     </div>
   </footer>
 </template>

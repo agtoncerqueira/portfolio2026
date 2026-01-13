@@ -87,7 +87,7 @@ const showVideo = computed(() => {
                     {{ blok.headline }} 
                 </h1>
             
-                <h2 class="font-display text-xl md:text-1xl lg:text-2xl"
+                <h2 class="font-display text-xl md:text-1xl lg:text-2xl text-shadow-md"
                     :class="[textColor, horizontalAlignment]" v-motion-slide-visible-left>
                     {{ blok.lead }}
                 </h2>

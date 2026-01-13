@@ -57,9 +57,9 @@ onMounted(() => {
           :alt="logo.alt"
           :width="logo.filename.width"
           :height="logo.filename.height"
-          class="pointer-events-none max-h-[80px] w-full max-w-[180px] origin-left object-contain transition-transform duration-700 xl:max-w-[250px]"
+          class="pointer-events-none max-h-[80px] w-full max-w-[230px] origin-left object-contain transition-transform duration-700 xl:max-w-[250px]"
           :class="logoScale"
-          aria-label="Voltar à Página Inicial da Aghi Sports"
+          aria-label="Voltar à Página Inicial de Aghi Sports"
         />
       </NuxtLink>
       <nav class="main-nav invisible mx-auto hidden lg:visible lg:block">
