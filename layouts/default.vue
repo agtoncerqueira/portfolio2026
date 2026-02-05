@@ -69,3 +69,24 @@ onMounted(() => {
 })
 
 </script>
+
+<style>
+  :root {
+    --nav-background-color: #ffffff;
+  }
+  
+  
+  section.page-section {
+    @apply py-16 sm:py-20 md:py-24 lg:py-28 xl:py-32;
+  }
+  
+  section.page-section.bg-white + section.page-section.bg-white,
+  section.page-section.bg-primary-background + section.page-section.bg-primary-background {
+    @apply pt-0;
+  }
+  section.page-section.contact-form-section:last-child {
+    @media not all and screen(lg) {
+      @apply pb-0;
+    }
+  }
+  </style>

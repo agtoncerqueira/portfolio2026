@@ -6,7 +6,7 @@
         <div class="bg-white py-24 sm:py-32">
         <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
             <h2 class="text-center text-base/7 font-semibold text-lime-400 animate-fade-up animate-ease-in">{{ blok.headline }}</h2>
-            <p class="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl animate-fade-up animate-ease-in">{{ blok.lead }}</p>
+            <p class="mx-auto mt-2 text-center text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl animate-fade-up animate-ease-in">{{ blok.lead }}</p>
             <div class="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
             <div class="relative lg:row-span-2 animate-fade-up animate-ease-in animate-delay-400">
                 <div class="absolute inset-px rounded-lg bg-gray-200 lg:rounded-l-4xl" />
