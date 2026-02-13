@@ -78,7 +78,7 @@ export default defineNuxtConfig({
           hid: 'twitter:description',
           name: 'twitter:description',
           content:
-            'A Lambertiny não apenas produzir eventos; nós materializamos sonhos. Entendemos que um evento público bem executado movimenta a economia, gera turismo e traz orgulho para a população. Atuamos no mercado cenográfico com foco total em transformar o imaginário em realidade. Seja em eventos de grande, médio ou pequeno porte, nossa missão é a excelência estética e a precisão na entrega.',
+            'My journey is driven by the intersection of art and logic. With over 15 years of experience, I began my career in the demanding fashion industry, where I refined my eye for aesthetics, composition, and detail as a graphic and textile designer. This solid visual foundation evolved organically into the digital realm. For the past 7 years, I have dived deep into web development, specializing in modern ecosystems like Nuxt.js and Laravel to build robust, high-performance solutions. As a self-taught motion designer and video editor, I don’t just build a website’s structure—I bring a brand’s visual narrative to life. I am a designer who writes code and a developer who values pixel-perfection.',
         },
         {
           hid: 'twitter:image',

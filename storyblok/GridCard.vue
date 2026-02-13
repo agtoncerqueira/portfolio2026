@@ -136,7 +136,6 @@
           v-motion-fade-visible
         />
   
-        <!-- Título e texto -->
         <div class="flex flex-col items-center w-full" :class="textClasses">
           <h3 class="font-display text-xl font-bold mb-3" v-motion-slide-visible-left>
             {{ blok.label }}
@@ -146,7 +145,6 @@
           </div>
         </div>
   
-        <!-- Botões -->
         <div v-if="blok.button?.length" class="mt-4" v-motion-fade-visible>
           <Button
             v-for="button in blok.button"

@@ -5,6 +5,14 @@ const optimizedArticleImage = computed(() =>
   getOptimizedImage(props.blok.image, 1600, 800),
 );
 
+useHead({
+  title: props.blok?.meta_title,
+  meta: [
+    { name: 'description', content: props.blok?.meta_description },
+  ],
+})
+
+console.log(props.blok)
 </script>
 
 <template>
@@ -34,11 +42,5 @@ const optimizedArticleImage = computed(() =>
         <StoryblokRichText :doc="blok.text" />
       </main>
     </div>
-    
-    <!-- <Banner
-      v-if="blok?.call_to_action?.length"
-      :blok="blok.call_to_action[0].content"
-      :referenced="true"
-    /> -->
   </article>
 </template>

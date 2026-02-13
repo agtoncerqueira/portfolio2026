@@ -24,9 +24,9 @@
           :alt="item.title"
           class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <div
+        <!-- <div
           class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-all duration-300"
-        ></div>
+        ></div> -->
       </div>
     </div>
     </section>

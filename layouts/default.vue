@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <main :style="cssVariables">
+  <main :style="cssVariables">
       <Header v-if="story"
           :logo="story.content.header_logo"
           :disable_transparency="story.content.header_disable_transparency"
@@ -9,7 +8,7 @@
           :light="story.content.header_light"
         />
       <div class="overflow-hidden">
-        <slot />
+        <slot :key="$route.fullPath" />
       </div>
       <LazyFooter v-if="story" hydrate-on-visible
       :logo="story.content.footer_logo"
@@ -19,8 +18,6 @@
       :youtube="story.content.youtube"
     />
     </main>
-    
-  </div>
 </template>
 
 <script setup>
@@ -31,8 +28,6 @@ const defaultColors = {
   '--medium': '#afffd3',
   '--dark': '#00c052',
 }
-
-const theme = reactive({ ...defaultColors })
 
 const runtimeConfig = useRuntimeConfig();
 const storyblokVersion = runtimeConfig.public.storyblokVersion;
@@ -59,13 +54,17 @@ onMounted(() => {
   }})
 
   const cssVariables = computed(() => {
+  if (!story.value || !story.value.content) {
+    return { ...defaultColors }
+  }
   
-  theme['--primary'] = story.value.content.primary.color
-  theme['--secondary'] = story.value.content.secondary.color
-  theme['--light'] = story.value.content.light.color
-  theme['--medium'] = story.value.content.medium.color
-  theme['--dark'] = story.value.content.dark.color
-  return theme
+  return {
+    '--primary': story.value.content.primary.color,
+    '--secondary': story.value.content.secondary.color,
+    '--light': story.value.content.light.color,
+    '--medium': story.value.content.medium.color,
+    '--dark': story.value.content.dark.color,
+  }
 })
 
 </script>

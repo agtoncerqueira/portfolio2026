@@ -7,6 +7,7 @@ let language = 'default';
 if (slug) {
   language = await getLanguage(slug);
 }
+const isLoading = ref(false);
 const runtimeConfig = useRuntimeConfig();
 const storyblokVersion = runtimeConfig.public.storyblokVersion;
 
@@ -21,19 +22,19 @@ const filterQuery = computed(() => {
       in: checkedCategory.value,
     };
   }
-
   return query;
+  
 });
 
 const storyblokApi = useStoryblokApi();
 
 const loading = ref(true);
 
-const articles = ref(null);
+const articles = ref([]);
 
 const fetchArticles = async () => {
   loading.value = true;
-  articles.value = null;
+  articles.value = [];
   const { data } = await storyblokApi.get('cdn/stories/', {
     version: storyblokVersion,
     starts_with: 'case-study',
@@ -47,9 +48,9 @@ const fetchArticles = async () => {
   loading.value = false;
 };
 
-fetchArticles();
+await fetchArticles();
 
-const categories = ref(null);
+const categories = ref([]);
 
 const getCategories = async () => {
   const { data } = await storyblokApi.get('cdn/stories/', {
@@ -59,7 +60,7 @@ const getCategories = async () => {
   categories.value = data.stories.filter(story => story.is_startpage !== true);
 };
 
-getCategories();
+await getCategories();
 
 const resetCategories = () => {
   checkedCategory.value = '';
@@ -78,7 +79,7 @@ const gridClasses = computed(() => getGridClasses());
 </script>
 
 <template>
-  <section v-editable="blok" class="container my-20 mx-auto">
+  <section v-editable="blok" class="container my-20 mx-auto mt-[200px]">
     <header>
       <Headline
         v-if="blok.headline" class="my-12 text-center text-3xl font-black sm:text-4xl lg:text-5xl"
@@ -93,15 +94,15 @@ const gridClasses = computed(() => getGridClasses());
             v-model="searchTerm"
             type="search"
             name="search"
-            placeholder="Search for anything"
-            class="border-dark rounded-lg border-2 px-12 py-4 text-xl focus:outline-none"
+            placeholder="Search for some projects"
+            class="border-dark rounded-lg border-2 px-8 py-4 text-xl focus:outline-none"
             @keypress.enter="fetchArticles()"
           />
         </div>
         <div class="border-medium mb-12 flex flex-col rounded-lg border p-1 lg:flex-row">
           <button
             class="w-full cursor-pointer rounded-md px-6 py-3 text-center text-lg"
-            :class=" !checkedCategory ? 'bg-primary-dark text-white' : 'text-primary-dark'"
+            :class=" !checkedCategory ? 'bg-primary text-secondary' : 'text-dark'"
             @click.prevent="resetCategories()"
           >
             All
@@ -111,7 +112,7 @@ const gridClasses = computed(() => getGridClasses());
             :key="category.uuid"
             :for="category.uuid"
             class="w-full cursor-pointer rounded-md px-6 py-3 text-center text-lg text-primary-dark"
-            :class=" checkedCategory === category.uuid ? 'bg-primary-dark text-white' : 'text-primary-dark'"
+            :class=" checkedCategory === category.uuid ? 'bg-primary text-secondary' : 'text-dark'"
           >
             <input
               :id="category.uuid"
@@ -127,9 +128,11 @@ const gridClasses = computed(() => getGridClasses());
       </nav>
     </header>
     <main class="pb-24">
-      <div v-if="loading">Loading</div>
+      <div >
+        <LoadingSpinner :isLoading="isLoading"/>
+      </div>
       <section
-        v-if="!loading && articles.length"
+        v-if="!loading && articles && articles.length"
         :class="gridClasses"
       >
         <ArticleCardVertical
@@ -140,7 +143,7 @@ const gridClasses = computed(() => getGridClasses());
         />
       </section>
 
-      <section v-else-if="!loading && !articles.length">
+      <section v-else-if="!loading && articles && !articles.length">
         Unfortunately, no content matched your criteria.
       </section>
     </main>
