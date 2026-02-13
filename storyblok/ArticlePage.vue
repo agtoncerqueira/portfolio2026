@@ -1,4 +1,6 @@
 <script setup>
+import { ChevronLeftIcon } from '@heroicons/vue/24/solid'
+
 const props = defineProps({ blok: Object });
 
 const optimizedArticleImage = computed(() =>
@@ -12,7 +14,7 @@ useHead({
   ],
 })
 
-console.log(props.blok)
+// console.log(props.blok)
 </script>
 
 <template>
@@ -41,6 +43,14 @@ console.log(props.blok)
       <main v-if="blok.text" class="prose prose-lg mx-auto my-12">
         <StoryblokRichText :doc="blok.text" />
       </main>
+      <div class="mx-auto max-w-md mb-8">
+        <NuxtLink to="/case-study" class="flex items-center justify-center text-center gap-2 px-4 py-2 text-sm font-mediumtext-dark bg-secondary border border-gray-300 rounded-md shadow-sm hover:bg-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-150 ease-in-out">
+        <ChevronLeftIcon
+          class="h-5 w-5 text-dark font-bold"
+          aria-hidden="true"
+        /> <span class="text-dark font-bold "> Go back </span>
+      </NuxtLink>
+      </div>
     </div>
   </article>
 </template>

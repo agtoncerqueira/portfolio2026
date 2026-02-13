@@ -3,7 +3,9 @@
       <SiteConfig v-if="slug && slug[0] === 'site-config'"
       class="px-4 py-32" />
         <NuxtLayout>
+          <Transition name="page" >
             <NuxtPage :key="$route.fullPath" />
+          </Transition>
         </NuxtLayout>
     </div>
 </template>

@@ -1,4 +1,5 @@
 <template>
+<div>
   <main :style="cssVariables">
       <Header v-if="story"
           :logo="story.content.header_logo"
@@ -17,7 +18,8 @@
       :instagram="story.content.instagram"
       :youtube="story.content.youtube"
     />
-    </main>
+  </main>
+</div>
 </template>
 
 <script setup>
