@@ -13,13 +13,11 @@ useHead({
     { name: 'description', content: props.blok?.meta_description },
   ],
 })
-
-// console.log(props.blok)
 </script>
 
 <template>
   <article v-editable="blok">
-    <div class="container mx-auto mt-[200px] px-8">
+    <div class="container mx-auto mt-[150px] md:mt-[200px] px-8">
       <header>
         <div class="mx-auto mb-12 max-w-2xl text-center">
           <CategoriesList v-if="blok?.categories?.length" :categories="blok.categories" class="mt-12 flex justify-center space-x-4" />
@@ -29,10 +27,33 @@ useHead({
           >
             {{ blok.headline }}
           </Headline>
+          <!-- component -->
+          
+            <nav class="text-sm sm:text-base bg-white p-4 md:p-6 lg:p-6 rounded-md">
+              <ol class="list-none p-0 inline-flex space-x-1">
+                <li class="flex items-center">
+                  <NuxtLink to="/" class="flex cursor-default text-gray-600 hover:text-blue-500 transition-colors duration-300">
+                    <svg onclick="window.location.href='/';" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" class="cursor-pointer hover:fill-blue-500 transition-colors duration-300" fill="#4b5563">
+                      <path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/></svg>
+                      <span class="mx-2">/</span>
+                  </NuxtLink>  
+                </li>
+                <li class="flex items-center">
+                  <NuxtLink to="/case-study" class="cursor-default text-gray-600 hover:text-blue-500 transition-colors duration-300">
+                     Portfolio 
+                  </NuxtLink>
+                  <span class="mx-2">/</span>
+                </li>
+                <li class="flex items-center">
+                  <span class="text-dark font-medium">{{ blok.headline }}</span>
+                </li>
+              </ol>
+            </nav>
         </div>
-        <div v-if="optimizedArticleImage" class="px-4 lg:px-0">
+        <div v-if="optimizedArticleImage" class="px-0 lg:px-0">
           <div class="relative">
             <img
+              loading="lazy"
               :src="optimizedArticleImage"
               :alt="blok.image?.alt"
               class="h-auto w-full rounded-xl"
@@ -41,16 +62,21 @@ useHead({
         </div>
       </header>
       <main v-if="blok.text" class="prose prose-lg mx-auto my-12">
-        <StoryblokRichText :doc="blok.text" />
+        <StoryblokRichText :doc="blok?.text" />
       </main>
-      <div class="mx-auto max-w-md mb-8">
-        <NuxtLink to="/case-study" class="flex items-center justify-center text-center gap-2 px-4 py-2 text-sm font-mediumtext-dark bg-secondary border border-gray-300 rounded-md shadow-sm hover:bg-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-150 ease-in-out">
-        <ChevronLeftIcon
-          class="h-5 w-5 text-dark font-bold"
-          aria-hidden="true"
-        /> <span class="text-dark font-bold "> Go back </span>
-      </NuxtLink>
+      <div class="mx-auto max-w-sm mb-8">
+        <NuxtLink to="/case-study" class="flex items-center justify-center text-center gap-2 px-4 py-4 text-sm font-medium text-dark bg-secondary border border-gray-300 rounded-full shadow-sm hover:bg-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-150 ease-in-out">
+          <ChevronLeftIcon
+            class="h-5 w-5 text-dark font-bold"
+            aria-hidden="true"
+          /> <span class="text-dark font-bold ">Portfolio</span>
+        </NuxtLink>
       </div>
     </div>
+    <Banner
+      v-if="blok?.call_to_action?.length"
+      :blok="blok.call_to_action[0].content"
+      :referenced="true"
+    />
   </article>
 </template>

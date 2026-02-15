@@ -4,6 +4,7 @@ const props = defineProps({ article: Object, slug: String, layout: String });
 const optimizedImage = computed(() =>
   getOptimizedImage(props.article?.image, 800, 600),
 );
+console.log(props.article)
 </script>
 
 <template>
@@ -21,7 +22,7 @@ const optimizedImage = computed(() =>
     </NuxtLink> 
     <div class="flex h-full flex-col">
       <div class="flex grow flex-col space-y-4">
-        <CategoriesList v-if="article.categories.length" :categories="article.categories" class="flex space-x-4" />
+        <CategoriesList v-if="article.categories?.length" :categories="article.categories" class="flex space-x-4" />
         <NuxtLink :to="`/${slug}`">
           <h3 v-if="article.headline" class="font-display text-2xl font-black">
             {{ article.headline }}
