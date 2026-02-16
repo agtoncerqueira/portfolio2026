@@ -13,7 +13,7 @@
         
       <div class="relative z-10 mx-auto">
         
-        <h3 class="text-2xl font-semibold leading-snug">
+        <h3 v-if="blok?.headline" class="text-2xl font-semibold leading-snug">
           {{ blok.headline }}
         </h3>
         <Button
@@ -27,16 +27,16 @@
     </div>
   </div>
   <VueEasyLightbox
-          :visible="visibleRef"
-          :imgs="optimizedImage"
-          :index="indexRef"
-          @hide="onHide"
-        >
-        <template v-slot:toolbar="{ toolbarMethods }">
-          <button @click="toolbarMethods.zoomIn">zoom in</button>
-          <button @click="toolbarMethods.zoomOut">zoom out</button>
-        </template>
-        </VueEasyLightbox>
+    :visible="visibleRef"
+    :imgs="optimizedImage"
+    :index="indexRef"
+    @hide="onHide"
+  >
+    <template v-slot:toolbar="{ toolbarMethods }">
+      <button @click="toolbarMethods.zoomIn">zoom in</button>
+      <button @click="toolbarMethods.zoomOut">zoom out</button>
+    </template>
+  </VueEasyLightbox>
 </div>
 </template>
 

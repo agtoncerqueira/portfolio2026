@@ -13,7 +13,11 @@
 <script setup>
 const route = useRoute()
 const slug = route.params.slug
+const runtimeConfig = useRuntimeConfig();
 
+useHead({
+     title: runtimeConfig.public.APP_TITLE,
+})
 
 // const nuxtApp = useNuxtApp();
 

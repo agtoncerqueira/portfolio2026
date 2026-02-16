@@ -11,9 +11,14 @@ const fixedHeightImages = computed(() => {
 })
 
 const optimizedImage = computed(() => getOptimizedImage(props.blok.image))
-const optimizedBgImage = computed(() =>
-  getOptimizedImage(props.blok.background_image, 1000),
-)
+const optimizedBgImage = computed(() => {
+  if (props.blok?.background_image.filename) {
+    getOptimizedImage(props.blok.background_image, 1000);
+
+    return 'background-image: url(' + optimizedBgImage + ');background-size: cover; background-position: left; background-repeat: no-repeat;'
+  }
+  return '';
+})
 
 const textColor = computed(() => {
   return 'text-' + props.blok.text_color
@@ -30,12 +35,7 @@ const verticalPadding = computed(() => {
     v-editable="blok"
     class="page-section image-text-section"
     :class="'bg-' + blok.background_color"
-    style="
-      background-size: cover;
-      background-position: left;
-      background-repeat: no-repeat;
-    "
-    :style="{ 'background-image': 'url(' + optimizedBgImage + ')' }"
+    :style="optimizedBgImage"
   >
     <div
       class="container grid items-center gap-6 sm:gap-10 md:gap-12 lg:grid-cols-2 px-12 mx-auto"

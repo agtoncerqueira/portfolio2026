@@ -18,7 +18,7 @@ export default defineNuxtConfig({
       viewport:
         'width=device-width, initial-scale=1.0',
       title: process.env.APP_TITLE,
-      titleTemplate: `%s - Graphic Designer adn Web Developer`,
+      titleTemplate: `%s - Graphic Designer and Web Developer`,
       link: [
         { 
           rel: 'canonical', 
@@ -36,14 +36,9 @@ export default defineNuxtConfig({
         {
           name: 'keywords',
           content:
-            'My journey is driven by the intersection of art and logic. With over 15 years of experience, I began my career in the demanding fashion industry, where I refined my eye for aesthetics, composition, and detail as a graphic and textile designer. This solid visual foundation evolved organically into the digital realm. For the past 7 years, I have dived deep into web development, specializing in modern ecosystems like Nuxt.js and Laravel to build robust, high-performance solutions. As a self-taught motion designer and video editor, I don’t just build a website’s structure—I bring a brand’s visual narrative to life. I am a designer who writes code and a developer who values pixel-perfection.',
+            'Graphic Designer, Web Developer, Nuxt.js, UI/UX, Branding, Landing Pages, Photoshop, Adobe Illustrator, Wordpress, CMS, Desenvolvedor de Site, Design de camisetas',
         },
         { name: 'robots', content: '' },
-        {
-          'http-equiv': 'X-UA-Compatible',
-          content: 'IE=EmulateIE8',
-        },
-  
         {
           hid: 'og:title',
           property: 'og:title',
