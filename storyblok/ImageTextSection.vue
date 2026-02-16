@@ -10,14 +10,19 @@ const fixedHeightImages = computed(() => {
   }
 })
 
-const optimizedImage = computed(() => getOptimizedImage(props.blok.image, 1000))
+const optimizedImage = computed(() => getOptimizedImage(props.blok.image))
 const optimizedBgImage = computed(() =>
   getOptimizedImage(props.blok.background_image, 1000),
 )
 
 const textColor = computed(() => {
   return 'text-' + props.blok.text_color
-})
+});
+
+const verticalPadding = computed(() => {
+  return 'py-' + props.blok.verticalPadding;
+});
+
 </script>
 
 <template>
@@ -33,7 +38,9 @@ const textColor = computed(() => {
     :style="{ 'background-image': 'url(' + optimizedBgImage + ')' }"
   >
     <div
-      class="container grid items-center gap-6 sm:gap-10 md:gap-12 lg:grid-cols-2 px-12 mx-auto py-16">
+      class="container grid items-center gap-6 sm:gap-10 md:gap-12 lg:grid-cols-2 px-12 mx-auto"
+      :class="verticalPadding"
+      >
       <div
         class="order-last text-left"
         :class="[blok.reverse_layout ? '' : 'lg:order-first', textColor]"

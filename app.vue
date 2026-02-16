@@ -1,34 +1,41 @@
 <template>
-    <div class="h-screen">
-      
+    <div class="layout">
       <SiteConfig v-if="slug && slug[0] === 'site-config'"
       class="px-4 py-32" />
         <NuxtLayout>
-          
-            <NuxtPage />
-          
+          <Transition name="page" >
+            <NuxtPage :key="$route.fullPath" />
+          </Transition>
         </NuxtLayout>
     </div>
 </template>
 
 <script setup>
-
 const route = useRoute()
 const slug = route.params.slug
 
-const nuxtApp = useNuxtApp();
-const loading = ref(false);
 
-nuxtApp.hook("page:start", () => {
-  loading.value = true;
-});
-nuxtApp.hook("page:finish", () => {
-  loading.value = false;
-});
+// const nuxtApp = useNuxtApp();
 
+// const { isLoading } = usePageLoading()
+// const loading = ref(false);
+
+// nuxtApp.hook("page:start", () => {
+//   loading.value = true;
+// });
+// nuxtApp.hook("page:finish", () => {
+//   loading.value = false;
+// });
+// const { $pageLoading } = useNuxtApp()
+// const pageLoading = $pageLoading
 </script>
 
 <style>
+.layout {
+  width: 100%;
+  min-height: 100vh;
+}
+
 .page-enter-active,
 .page-leave-active {
   transition: all 0.4s;
