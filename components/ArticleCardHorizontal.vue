@@ -20,7 +20,7 @@ const optimizedImage = computed(() =>
       class="aspect-square size-[200px] rounded-xl md:order-1"
     />
     <div>
-      <CategoriesList v-if="article.categories.length" :categories="article.categories" class="mb-4 flex gap-4 lg:flex-col xl:flex-row" />
+      <CategoriesList v-if="article.categories?.length" :categories="article.categories" class="mb-4 flex gap-4 lg:flex-col xl:flex-row" />
       <h3 v-if="article.headline" class="font-display text-2xl font-black">
         {{ article.headline }}
       </h3>

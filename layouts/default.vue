@@ -17,6 +17,8 @@
       :pinterest="story.content.pinterest"
       :instagram="story.content.instagram"
       :youtube="story.content.youtube"
+      :linkedin="story.content.linkedin"
+      :github="story.content.github"
     />
   </main>
 </div>

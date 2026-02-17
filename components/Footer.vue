@@ -5,6 +5,8 @@ defineProps({
   pinterest: Object,
   instagram: Object,
   youtube: Object,
+  linkedin: Object,
+  github: Object
 })
 const today = new Date()
 const currentYear = ref('')
@@ -38,6 +40,8 @@ onMounted(() => {
             :pinterest="pinterest"
             :instagram="instagram"
             :youtube="youtube"
+            :linkedin="linkedin"
+            :github="github"
           />
         </div>
       </div>
