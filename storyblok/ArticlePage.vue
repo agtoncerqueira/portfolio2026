@@ -2,15 +2,64 @@
 import { ChevronLeftIcon } from '@heroicons/vue/24/solid'
 
 const props = defineProps({ blok: Object });
+const route = useRoute();
+const runtimeConfig = useRuntimeConfig();
+const appURL = runtimeConfig.public.appURL;
+const canonicalURL = `${appURL}${route.path}`
+
 
 const optimizedArticleImage = computed(() =>
   getOptimizedImage(props.blok.image, 1600, 800),
 );
 
 useHead({
-  title: props.blok?.meta_title,
+  title: props.blok?.meta_title ?? "Aghi Cerqueira Portfolio",
+  link: [
+    { 
+      rel: 'canonical', 
+      href: `${canonicalURL}`
+    },
+  ],
   meta: [
-    { name: 'description', content: props.blok?.meta_description },
+    { name: 'description', content: props.blok?.meta_description || "My journey is driven by the intersection of art and logic. With over 15 years of experience, I began my career in the demanding fashion industry, where I refined my eye for aesthetics, composition, and detail as a graphic and textile designer. This solid visual foundation evolved organically into the digital realm. For the past 7 years, I have dived deep into web development, specializing in modern ecosystems like Nuxt.js and Laravel to build robust, high-performance solutions. As a self-taught motion designer and video editor, I don’t just build a website’s structure—I bring a brand’s visual narrative to life. I am a designer who writes code and a developer who values pixel-perfection."},
+    {
+          hid: 'og:title',
+          property: 'og:title',
+          content: props.blok?.meta_title || "Aghi Cerqueira Portfolio",
+        },
+        { hid: 'og:url', property: 'og:url', content: `${canonicalURL}` },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: props.blok?.meta_description || "My journey is driven by the intersection of art and logic. With over 15 years of experience, I began my career in the demanding fashion industry, where I refined my eye for aesthetics, composition, and detail as a graphic and textile designer. This solid visual foundation evolved organically into the digital realm. For the past 7 years, I have dived deep into web development, specializing in modern ecosystems like Nuxt.js and Laravel to build robust, high-performance solutions. As a self-taught motion designer and video editor, I don’t just build a website’s structure—I bring a brand’s visual narrative to life. I am a designer who writes code and a developer who values pixel-perfection.",
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: optimizedArticleImage || "/cover-aghi-portfolio.jpg"
+        },
+  
+        // twitter card
+        {
+          hid: 'twitter:title',
+          name: 'twitter:title',
+          content: props.blok?.meta_title || "Aghi Cerqueira Portfolio",
+        },
+        {
+          hid: 'twitter:url',
+          name: 'twitter:url',
+          content: canonicalURL,
+        },
+        {
+          hid: 'twitter:description',
+          name: 'twitter:description',
+          content: props.blok?.meta_description || "My journey is driven by the intersection of art and logic. With over 15 years of experience, I began my career in the demanding fashion industry, where I refined my eye for aesthetics, composition, and detail as a graphic and textile designer. This solid visual foundation evolved organically into the digital realm. For the past 7 years, I have dived deep into web development, specializing in modern ecosystems like Nuxt.js and Laravel to build robust, high-performance solutions. As a self-taught motion designer and video editor, I don’t just build a website’s structure—I bring a brand’s visual narrative to life. I am a designer who writes code and a developer who values pixel-perfection.",
+        },
+        {
+          hid: 'twitter:image',
+          name: 'twitter:image',
+          content: optimizedArticleImage || "/cover-aghi-portfolio.jpg"
+        },
   ],
 })
 </script>
@@ -55,7 +104,7 @@ useHead({
             <img
               loading="lazy"
               :src="optimizedArticleImage"
-              :alt="blok.image?.alt"
+              :alt="blok.image?.alt || blok.headline"
               class="h-auto w-full rounded-xl"
             />
           </div>

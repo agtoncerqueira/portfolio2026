@@ -38,7 +38,7 @@ export default defineNuxtConfig({
           content:
             'Graphic Designer, Web Developer, Nuxt.js, UI/UX, Branding, Landing Pages, Photoshop, Adobe Illustrator, Wordpress, CMS, Desenvolvedor de Site, Design de camisetas',
         },
-        { name: 'robots', content: '' },
+        { name: 'robots', content: 'index, follow' },
         {
           hid: 'og:title',
           property: 'og:title',
@@ -93,7 +93,7 @@ export default defineNuxtConfig({
         region: '' // Set 'US" if your space is created in US region (EU default)
       }
     },
-  ], '@nuxtjs/tailwindcss', 'nuxt-easy-lightbox', '@vueuse/motion/nuxt', '@nuxtjs/critters', '@nuxtjs/sitemap', '@nuxtjs/robots'],
+  ], '@nuxtjs/tailwindcss', 'nuxt-easy-lightbox', '@vueuse/motion/nuxt', '@nuxtjs/critters', '@nuxtjs/sitemap'],
   sitemap: {
     sources: ["/api/__sitemap__/urls"]
   },

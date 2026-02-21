@@ -4,7 +4,6 @@ const props = defineProps({ article: Object, slug: String, layout: String });
 const optimizedImage = computed(() =>
   getOptimizedImage(props.article?.image, 800, 600),
 );
-console.log(props.article)
 </script>
 
 <template>

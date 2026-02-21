@@ -64,28 +64,28 @@ const verticalPadding = computed(() => {
             v-if="!fixedHeightImages"
             loading="lazy"
             :src="optimizedImage"
-            :alt="blok.image.alt"
+            :alt="blok.image?.alt || blok.headline"
             class="pointer-events-none rounded-lg shadow-2xl"
           />
           <img
             v-if="fixedHeightImages"
             loading="lazy"
             :src="fixedHeightImages.mobile"
-            :alt="blok.image.alt"
+            :alt="blok.image?.alt || blok.headline"
             class="pointer-events-none rounded-lg shadow-2xl md:invisible md:hidden"
           />
           <img
             v-if="fixedHeightImages"
             loading="lazy"
             :src="fixedHeightImages.tablet"
-            :alt="blok.image.alt"
+            :alt="blok.image?.alt || blok.headline"
             class="pointer-events-none invisible hidden rounded-lg shadow-2xl md:visible md:block lg:invisible lg:hidden"
           />
           <img
             v-if="fixedHeightImages"
             loading="lazy"
             :src="fixedHeightImages.desktop"
-            :alt="blok.image.alt"
+            :alt="blok.image?.alt || blok.headline"
             class="pointer-events-none invisible hidden rounded-lg shadow-2xl lg:visible lg:block"
           />
         </div>
