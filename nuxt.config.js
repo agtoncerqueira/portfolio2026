@@ -28,6 +28,7 @@ export default defineNuxtConfig({
         {rel: 'dns-prefetch', href: 'https://api.storyblok.com'},
       ],
       meta: [
+        { name: 'p:domain_verify', content: 'ac1214e1d5b83f19b8fb6b349fb7c0d1' },
         {
           name: 'description',
           content:
